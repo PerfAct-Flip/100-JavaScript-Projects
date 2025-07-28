@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Div</title>
+    <style>
+        /* This CSS class will be toggled by JavaScript */
+        .hidden {
+            display: none;
+        }
+
+        /* Optional: Some basic styling for better visibility */
+        .toggleBox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #f9f9f9;
+        }
+        .list {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px dashed #eee;
+        }
+    </style>
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <ul class="divlist">
+        <li class="list">
+            <button class="toggleBtn"> Hide </button>
+            <div class="toggleBox">This is Div 1 content.</div>
+        </li>
+        <li class="list">
+            <button class="toggleBtn"> Hide </button>
+            <div class="toggleBox">This is Div 2 content.</div>
+        </li>
+        <li class="list">
+            <button class="toggleBtn"> Hide </button>
+            <div class="toggleBox hidden">This is Div 3 content. (Starts hidden)</div>
+        </li>
+    </ul>
+</body>
+</html>
