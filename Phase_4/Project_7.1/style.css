@@ -1,0 +1,85 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px; 
+}
+.accordion-container {
+    width: 100%;
+    max-width: 800px; 
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+    background-color: #519ff2;
+    color: white;
+    margin-bottom: 0;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #eee;
+}
+
+.accordion-item:last-child {
+    border-bottom: none; 
+}
+
+.accordion-header {
+    background-color: #83b7ef;
+    color: white;
+    padding: 15px 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #368eeb;
+}
+
+.accordion-content {
+    padding: 0 20px;
+    background-color: #f9f9f9;
+    overflow: hidden; /* Hide overflow content */
+    /*
+    For a smooth transition, you'd typically use max-height: 0 and then max-height: large_value.
+    But since you explicitly said you'll add functionality on your own,
+    we'll start with 'display: none' as the base hidden state,
+    which is simpler to toggle directly in JS.
+    */
+    transition: all 0.3s ease-in-out; 
+}
+.accordion-content p,
+.accordion-content ul {
+    padding: 15px 0; /* Add vertical padding to content inside */
+}
+
+/* Class to hide the content */
+.hidden {
+    display: none;
+}
+
+/* Optional: Styles for when an accordion header is "active" (e.g., its content is open) */
+/* You would add a class like 'active' to the header via JS when its content is open */
+.accordion-header.active {
+    background-color: #101315;
+}
