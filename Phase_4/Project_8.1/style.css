@@ -1,0 +1,90 @@
+/* Basic Reset & Body Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.calculator {
+    background-color: #333;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    overflow: hidden;
+}
+
+.calculator-display {
+    background-color: #1c1c1c;
+    color: #fff;
+    font-size: 3.5em;
+    padding: 20px;
+    text-align: right;
+    height: 90px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: #222;
+}
+
+.btn {
+    background-color: #505050;
+    color: #fff;
+    border: none;
+    padding: 20px;
+    font-size: 1.8em;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+    background-color: #6d6d6d;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-clear,
+.btn-operator,
+.btn-equals {
+    background-color: #ff9500;
+}
+
+.btn-operator.active {
+    background-color: #544f47; /* A lighter shade of orange */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Adds a sunken effect */
+}
+
+.btn-clear {
+    background-color: #d4d4d2;
+    color: #1c1c1c;
+}
+
+.btn-equals {
+    /* grid-column: span 2; */
+    border-bottom-right-radius: 10px;
+}
+
+.btn-zero {
+    grid-column: span 2;
+    border-bottom-left-radius: 10px;
+}
