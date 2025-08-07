@@ -1,0 +1,122 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6e9ed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    margin: 0;
+}
+
+/* Header */
+.title {
+    color: #4a4a4a;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #4a4a4a;
+    padding-bottom: 10px;
+}
+
+/* Add Task Section */
+.add-task-container {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+#new-task-input {
+    flex-grow: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#new-task-input::placeholder {
+    color: #b0b0b0;
+}
+
+#add-task-button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-task-button:hover {
+    background-color: #4cae4c;
+}
+
+/* List Container */
+.list-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+/* To-Do List */
+#task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* List Items */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item:hover {
+    background-color: #f9f9f9;
+}
+
+/* Task Content */
+.task-content {
+    flex-grow: 1;
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4;
+    padding-right: 15px;
+    word-wrap: break-word;
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
