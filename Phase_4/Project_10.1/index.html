@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile with Modal</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="profile-card">
+        <img src="dp.jpg" alt="Profile Picture" class="profile-picture" />
+        <h2 class="profile-name">PerfAct Flip</h2>
+        <p class="profile-title">Engineering Student</p>
+        <p class="profile-bio">A developer working on random shit.</p>
+
+        <button id="open-modal-button" class="profile-button">
+          View Profile
+        </button>
+      </div>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+      <div class="modal-content-box">
+        <span id="close-modal-button" class="close-button">&times;</span>
+
+        <h3>Profile Details</h3>
+        <p>
+          Some more info.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
