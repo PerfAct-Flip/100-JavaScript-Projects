@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherIN</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <div class="page-container">
+        <h1 class="main-header">WeatherIN</h1>
+
+        <div class="search-container">
+            <input type="text" id="cityInput" placeholder="Enter city name...">
+            <button id="searchButton">Search</button>
+        </div>
+
+        <div class="weather-box">
+            <div class="temp-time">
+                <span id="temperature">...°</span>
+                <span id="time">...</span>
+            </div>
+            <div class="location-description">
+                <span id="location">...</span>
+                <span id="description">...</span>
+            </div>
+        </div>
+
+        <div class="astro-box">
+            <h2 class="section-header">Astro</h2>
+            <ul class="astro-list">
+                <li><span class="astro-label">sunrise:</span> <span id="sunrise">...</span></li>
+                <li><span class="astro-label">sunset:</span> <span id="sunset">...</span></li>
+                <li><span class="astro-label">moonrise:</span> <span id="moonrise">...</span></li>
+                <li><span class="astro-label">moonset:</span> <span id="moonset">...</span></li>
+                <li><span class="astro-label">moon phase:</span> <span id="moon-phase">...</span></li>
+                <li><span class="astro-label">moon illumination:</span> <span id="moon-illumination">...</span></li>
+            </ul>
+        </div>
+        
+        <div id="airQualityBox">
+        </div>
+    </div>
+
+  
+</body>
+</html>

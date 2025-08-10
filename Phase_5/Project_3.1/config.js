@@ -1,0 +1,1 @@
+export const WEATHERSTACK_API_KEY = "API_KEY";
