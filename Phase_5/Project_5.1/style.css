@@ -80,7 +80,8 @@ h1 {
 }
 
 #start-btn,
-#restart-btn {
+#restart-btn,
+#next-btn {
     background-color: var(--main-color);
     color: white;
     border: none;
@@ -92,7 +93,8 @@ h1 {
 }
 
 #start-btn:hover,
-#restart-btn:hover {
+#restart-btn:hover,
+#next-btn:hover {
     background-color: #3a75b8;
     transform: translateY(-2px);
 }
@@ -149,9 +151,7 @@ h1 {
     box-shadow: 0 0 0 2px var(--wrong-color);
 }
 
-.option-btn:disabled {
-    cursor: not-allowed;
-}
+
 
 .controls-container {
     display: flex;
@@ -220,3 +220,15 @@ h1 {
         transform: translateY(0);
     }
 }
+
+/* .selected {
+    background: var(--main-color);
+}
+
+.correct {
+    background-color: var(--correct-color);
+}
+
+.wrong {
+    background-color: var(--wrong-color);
+} */
