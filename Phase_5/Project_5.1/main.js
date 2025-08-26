@@ -39,16 +39,62 @@ const nextBtn = document.querySelector('#next-btn');
 const question = document.querySelector('#question-text');
 const options = document.querySelectorAll('.option-btn');
 const score = document.querySelector('#score');
+const resultScreen = document.querySelector('#results-screen');
+const finalScore = document.querySelector('#final-score');
+const restartBtn = document.querySelector('#restart-btn');
 let scoreValue = 0;
 let selectedAnswer = null;
 
 startBtn.addEventListener('click', startQuiz);
 submitBtn.addEventListener('click', checkAnswer);
 nextBtn.addEventListener('click', () => {
-    if (questionNumber < quizQuestions.length-1) {
-        questionNumber++;
+    nextBtnAction();
+
+});
+
+// START QUIZ
+function startQuiz() {
+    questionNumber = 0;
+    scoreValue = 0;
+    selectedAnswer = null;
+    
+    options.forEach(option => {
+        option.classList.remove('selected', 'correct', 'wrong');
+        option.disabled = false;
+    });
+
+    resultScreen.style.display = "none";
+    quizContent.style.display = "block";
+    startBtn.style.display = "none";
+    submitBtn.style.display = 'block';
+
+
+    renderQuestions();
+}
+
+// RENDER QUESTIONS
+function renderQuestions() {
+    // This is a slightly cleaner way to write the same logic
+    if (questionNumber < quizQuestions.length) {
+        question.textContent = quizQuestions[questionNumber].question;
+        options.forEach((option, index) => {
+            option.textContent = quizQuestions[questionNumber].options[index];
+        });
+    } else {
+        // This handles the end of the quiz
+        renderResult();
+    }
+}
+
+//NEXT BUTTON ACTIONS
+function nextBtnAction() {
+    questionNumber++;
+    console.log("before if :" + questionNumber);
+    if (questionNumber < quizQuestions.length - 1) {
+
         console.log("next clicked" + questionNumber);
-    }else {
+    } else {
+        console.log("final ques");
         nextBtn.style.display = "none";
     }
     score.textContent = scoreValue;
@@ -56,34 +102,11 @@ nextBtn.addEventListener('click', () => {
         option.classList.remove('selected', 'correct', 'wrong');
         option.disabled = false;
     });
-    renderQuiz();
-});
 
-function startQuiz() {
-    quizContent.style.display = "block";
-    startBtn.style.display = "none";
-    renderQuiz();
+    renderQuestions();
 }
 
-function renderQuiz() {
-    if (!(questionNumber >= quizQuestions.length)) {
-        question.textContent = quizQuestions[questionNumber].question;
-        let optionNumber = 0;
-        options.forEach(option => {
-            option.textContent = quizQuestions[questionNumber].options[optionNumber];
-            optionNumber++;
-        });
-    }
-    
-}
-
-function submitAction() {
-
-    checkAnswer();
-
-}
-
-
+// RESPONSE HIGHLIGHTING
 options.forEach(button => {
     button.addEventListener('click', () => {
         options.forEach(btn => {
@@ -95,7 +118,7 @@ options.forEach(button => {
     });
 });
 
-
+// CHECKING ANSWER
 function checkAnswer() {
     if (selectedAnswer === null) {
         alert("Please select an answer before submitting.");
@@ -124,8 +147,28 @@ function checkAnswer() {
         }
     }
 
-    // setTimeout(() => {
-    //     // questionNumber++;
-    //     renderQuiz();
-    // }, 15000);
+    if (!(questionNumber < quizQuestions.length-1)) {
+        console.log("result ");
+        renderResult();
+    }
+
+    // if (!(nextBtn.style.display === "none")) {
+    //     setTimeout(() => {
+    //         console.log("timeout to ques")
+    //         nextBtnAction();
+    //     }, 8000);
+    // }
 }
+
+
+// RENDER RESULT
+function renderResult() {
+    resultScreen.style.display = "block";
+    finalScore.textContent = scoreValue;
+}
+
+// RESTART QUIZ
+restartBtn.addEventListener('click', () => {
+    startQuiz();
+    
+})
