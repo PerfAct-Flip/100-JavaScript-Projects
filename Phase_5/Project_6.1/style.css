@@ -11,6 +11,7 @@
 body {
   font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -47,11 +48,20 @@ body {
 
 .board-items:hover {
   transform: scale(1.05);
+  border: #ccc92e 2px solid;
+  background-color: #2ecc71;
 }
 
 
 .board-items.x {
   color: #e74c3c; 
+}
+
+.board-items.o {
   color: #3498db; 
 }
 
+
+.information_box {
+  bottom: 0px
+}
