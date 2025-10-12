@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <script src="main.js" defer></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <ul class="player_list">
+            <li class="player" id="player1">
+                <h1>Player 1</h1>
+                <div class="turn_indicator active"></div>
+                <p>Score: <span class="score">0</span></p>
+            </li>
+            <li class="player" id="player2">
+                <h1>Player 2</h1>
+                <div class="turn_indicator"></div>
+                <p>Score: <span class="score">0</span></p>
+            </li>
+        </ul>
+    </header>
+    <h1 class="Game_title">Memory Card Game</h1>
+
+    <ul class="card_list">
+        <li class="card_item" id="card_1" data-pair-id="10">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/clubs_10.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_2" data-pair-id="6">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/clubs_6.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_3" data-pair-id="10">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/diamonds_10.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_4" data-pair-id="4">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/diamonds_4.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_5" data-pair-id="A">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/diamonds_A.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_6" data-pair-id="4">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/hearts_4.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_7" data-pair-id="J">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/hearts_J.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_8" data-pair-id="A">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/hearts_A.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_9" data-pair-id="6">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/spades_6.png" alt="">
+            </div>
+        </li>
+        <li class="card_item" id="card_10" data-pair-id="J">
+            <div class="card">
+                <div class="card_front"><button class="reveal">Reveal card</button></div>
+                <img class="card_img" src="./assests/spades_J.png" alt="">
+            </div>
+        </li>
+    </ul>
+
+
+    <div class="result">
+        <h3 class="result_text">Player<span id="winner"></span> won the game.</h3>
+        <button class="restart_button" onclick="restartGame()"> Restart Game</button>
+
+    </div>
+</body>
+
+</html>

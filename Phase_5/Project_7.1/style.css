@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f0f0f0;
+
+    background-image: repeating-linear-gradient(0deg,
+            #ccc,
+            #ccc 1px,
+            transparent 1px,
+            transparent 40px),
+        repeating-linear-gradient(90deg,
+            #ccc,
+            #ccc 1px,
+            transparent 1px,
+            transparent 40px);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    justify-self: flex-start;
+}
+
+.player_list {
+    /* position: fixed; */
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    border: 2px solid black;
+}
+
+.player {
+    margin: 4px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.turn_indicator {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    align-self: center;
+}
+
+.Game_title {
+    font-size: 2rem;
+    color: rgb(74, 233, 26);
+    border-bottom: 5px rgb(62, 165, 31) solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: 10px;
+
+}
+
+.card_list {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    border: 2px solid black;
+    width: 80%;
+    min-width: fit-content;
+    height: 70vh;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+}
+
+.card_item {
+    list-style: none;
+}
+
+.card .card_front {
+    height: 150px;
+    width: auto;
+    background: #8d4747;
+    border: 2px #000 solid;
+}
+
+.card .card_img {
+    max-height: 150px;
+    width: auto;
+}
+
+.turn_indicator.active {
+    background: rgb(74, 233, 26);
+}
+
+.restart_button {
+    background: #000;
+    color: #ccc;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+    box-shadow: #000 2px 2px 2px;
+
+}
+
+.restart_button:hover {
+    background-color: #9b2828;
+    color: aliceblue;
+}
+
+.reveal {
+    cursor: pointer;
+    color: #000;
+    background: #8d4747;
+    border: none;
+    font-size: 1rem;
+}
+
+.card_list .card_img {
+    display: none;
+}
+
+.card_list .card_front {
+    display: block;
+}
+
+.card_item .card_front.is-flipped {
+    display: none;
+}
+
+.card_item .card_img.is-flipped {
+    display: block !important;
+}
+
+.result_text {
+    display: none;
+}
+
+.result_text.show {
+    display: block;
+}
