@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+        body {
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f1f5f9; /* Slate 100 */
+            padding: 20px;
+        }
+
+       
+        #drawCanvas {
+            border: 4px solid #1e3a8a; 
+            cursor: crosshair;
+            touch-action: none; 
+            background-color: white;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            width: 90%; 
+            height: 40vh;   
+        }
+    </style>
+</head>
+<body class="selection:bg-indigo-300 selection:text-indigo-900">
+
+    <div class="w-full max-w-4xl flex flex-col items-center">
+        <h1 class="text-4xl font-extrabold text-indigo-800 mb-6 tracking-tight">
+            Canvas Sketchpad
+        </h1>
+
+        <div id="controls" class="w-full bg-white p-4 rounded-xl shadow-lg mb-6 flex flex-wrap justify-center gap-4 border border-indigo-100">
+            
+
+            <div class="flex items-center gap-2">
+                <label for="colorPicker" class="text-indigo-700 font-semibold">Color:</label>
+                <input type="color" id="colorPicker" value="#1e3a8a" class="w-12 h-8 rounded-md border-2 border-indigo-300 cursor-pointer">
+            </div>
+
+
+            <div class="flex items-center gap-3">
+                <label for="thickness" class="text-indigo-700 font-semibold">Size:</label>
+                <input type="range" id="thickness" min="1" max="50" value="10" class="w-24 h-2 bg-indigo-200 rounded-lg appearance-none cursor-pointer">
+                <span id="thicknessValue" class="text-indigo-600 font-bold w-6">10</span>
+            </div>
+
+
+            <button id="clearBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 shadow-md">
+                Clear Canvas
+            </button>
+        </div>
+
+        <!-- Canvas -->
+        <canvas id="drawCanvas"></canvas>
+    </div>
+
+    <script src="main.js"></script>
+    
+</body>
+</html>
