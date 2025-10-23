@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-10 min-h-screen flex flex-col items-center min-w-full">
+
+    <h1 class="text-3xl font-bold text-blue-600">Local Storage Counter</h1>
+    <div id="counter-display"
+        class="text-7xl font-mono font-bold text-indigo-600 bg-gray-100 py-8 px-20 m-8 rounded-lg mb-8 shadow-inner transition duration-300">
+        0
+    </div>
+    <div class="flex flex-col space-y-4">
+
+        <button id="increment-btn"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md transform hover:scale-[1.02]">
+            Increment Count (+1)
+        </button>
+
+        <button id="reset-btn"
+            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+            Reset Counter
+        </button>
+    </div>
+    <script>
+        const STORAGE_KEY = 'persistentCounterValue';
+
+        const count = document.querySelector('#counter-display');
+        const incrementBtn = document.getElementById('increment-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        let countNumber = 0;
+
+
+        function loadCount() {
+            const storedValue = localStorage.getItem(STORAGE_KEY);
+
+            if (storedValue !== null) {
+
+                countNumber = parseInt(storedValue, 10);
+                if (isNaN(countNumber)) countNumber = 0;
+                console.log(countNumber)
+            }
+
+            updateDisplay();
+        }
+
+        function saveCount() {
+            localStorage.setItem(STORAGE_KEY, countNumber.toString());
+        }
+        function updateDisplay() {
+            count.textContent = countNumber;
+        }
+        incrementBtn.addEventListener('click', () => {
+            countNumber++;
+            updateDisplay();
+            saveCount()
+        });
+
+        resetBtn.addEventListener('click', () => {
+            countNumber = 0;
+            updateDisplay();
+            localStorage.removeItem(STORAGE_KEY);
+        })
+
+        loadCount();
+    </script>
+</body>
+
+</html>
