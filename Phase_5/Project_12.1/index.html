@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .header,
+        .mainBody,
+        #toggle-btn {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="p-10 min-h-screen flex justify-center min-w-full mainBody">
+
+    <h1 class="text-3xl font-bold text-slate-950 header">Theme Switcher (Dark/Light Mode):</h1>
+    <button id="toggle-btn"
+        class="min-w-24 h-10 font-bold mx-2 px-6 rounded-lg transition duration-200 shadow-md transform hover:text-black hover:scale-[1.02]">
+
+    </button>
+
+    <script>
+        const STORAGE_KEY = 'persistentMode';
+
+        const mainBody = document.querySelector('body');
+        const header = document.querySelector('.header');
+        const toggleBtn = document.getElementById('toggle-btn');
+
+        let lightMode = false;
+
+        function loadMode() {
+            const storedValue = localStorage.getItem(STORAGE_KEY);
+            console.log("Stored value retrieved:", storedValue);
+
+            if (storedValue !== null) {
+                lightMode = storedValue === 'true';
+            }
+
+            applyTheme();
+        }
+
+        function saveMode() {
+            localStorage.setItem(STORAGE_KEY, lightMode.toString());
+        }
+
+        function applyTheme() {
+            mainBody.classList.remove('bg-white', 'text-black', 'bg-slate-950', 'text-white');
+            header.classList.remove('text-black', 'text-white');
+            toggleBtn.classList.remove('bg-slate-950', 'text-white', 'hover:bg-white', 'hover:text-black',
+                'bg-white', 'text-black', 'hover:bg-slate-950', 'hover:text-white');
+
+            if (lightMode) {
+                toggleBtn.textContent = "Dark Mode";
+                toggleBtn.classList.add('bg-slate-950', 'text-white', 'hover:bg-white', 'hover:text-black');
+                mainBody.classList.add('bg-white', 'text-black');
+                header.classList.add('text-black');
+            } else {
+                toggleBtn.textContent = "Light Mode";
+                toggleBtn.classList.add('bg-white', 'text-black', 'hover:bg-slate-950', 'hover:text-white');
+                mainBody.classList.add('bg-slate-950', 'text-white');
+                header.classList.add('text-white');
+            }
+        }
+
+        function toggleTheme() {
+            lightMode = !lightMode; 
+
+            applyTheme(); 
+            saveMode();   
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadMode();
+        });
+
+        toggleBtn.addEventListener('click', toggleTheme);
+    </script>
+</body>
+
+</html>
