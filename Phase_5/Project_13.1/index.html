@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-10 min-h-screen flex flex-col items-center min-w-full">
+
+
+    <div class="max-w-xl w-full bg-white p-6 md:p-10 rounded-xl shadow-2xl border border-indigo-100">
+        <h1 class="text-3xl font-extrabold text-indigo-700 mb-4 text-center">
+            Countdown Timer
+        </h1>
+
+        <div class="flex flex-col items-center justify-center gap-4 mb-6 p-4 bg-indigo-50 rounded-lg">
+            <label for="target-datetime" class="font-medium text-indigo-800 whitespace-nowrap">Target Time:</label>
+            <input type="datetime-local" id="target-datetime"
+                class="w-full p-2 border border-indigo-300 rounded-lg text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
+        </div>
+
+
+        <div class="flex justify-center gap-4 mb-8">
+            <button id="start-btn"
+                class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md">
+                Start Countdown
+            </button>
+            <button id="reset-btn"
+                class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md">
+                Reset Timer
+            </button>
+        </div>
+
+        <div id="timer-display" class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 text-center">
+
+            <div class="countdown-segment bg-indigo-600 text-white p-3 rounded-xl shadow-lg">
+                <span id="days" class="text-4xl md:text-5xl font-extrabold block">00</span>
+                <span class="text-xs font-semibold uppercase tracking-wider">Days</span>
+            </div>
+
+            <div class="countdown-segment bg-indigo-500 text-white p-3 rounded-xl shadow-lg">
+                <span id="hours" class="text-4xl md:text-5xl font-extrabold block">00</span>
+                <span class="text-xs font-semibold uppercase tracking-wider">Hours</span>
+            </div>
+
+            <div class="countdown-segment bg-indigo-400 text-white p-3 rounded-xl shadow-lg">
+                <span id="minutes" class="text-4xl md:text-5xl font-extrabold block">00</span>
+                <span class="text-xs font-semibold uppercase tracking-wider">Minutes</span>
+            </div>
+
+            <div class="countdown-segment bg-indigo-300 text-gray-800 p-3 rounded-xl shadow-lg">
+                <span id="seconds" class="text-4xl md:text-5xl font-extrabold block">00</span>
+                <span class="text-xs font-semibold uppercase tracking-wider">Seconds</span>
+            </div>
+
+        </div>
+        <p id="message" class="mt-8 text-xl font-semibold text-center text-red-500 hidden">
+            Countdown finished!
+        </p>
+
+    </div>
+
+    <script>
+        // === Global Constants  ===
+        const MS_PER_SECOND = 1000;
+        const MS_PER_MINUTE = MS_PER_SECOND * 60;
+        const MS_PER_HOUR = MS_PER_MINUTE * 60;
+        const MS_PER_DAY = MS_PER_HOUR * 24;
+
+        // ===== DOM Elements ======
+        const datetimeInput = document.getElementById('target-datetime');
+        const startBtn = document.querySelector('#start-btn');
+        const resetBtn = document.querySelector('#reset-btn');
+        const message = document.getElementById('message');
+
+        const countdownDays = document.querySelector('#days');
+        const countdownHours = document.querySelector('#hours');
+        const countdownMinutes = document.querySelector('#minutes');
+        const countdownSeconds = document.querySelector('#seconds');
+
+        let countdownInterval = null;
+
+
+        function resetDisplayAndStop() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+
+            countdownDays.textContent = '00';
+            countdownHours.textContent = '00';
+            countdownMinutes.textContent = '00';
+            countdownSeconds.textContent = '00';
+
+            startBtn.disabled = false;
+        }
+
+        datetimeInput.addEventListener('input', () => {
+            const targetDate = new Date(datetimeInput.value);
+            const currentDate = new Date();
+
+            if (targetDate.getTime() <= currentDate.getTime()) {
+                resetDisplayAndStop();
+                message.textContent = "Date and time must be in the future.";
+                message.classList.remove('hidden');
+            } else {
+                message.classList.add('hidden');
+            }
+        });
+
+
+        startBtn.addEventListener('click', () => {
+            const targetDateString = datetimeInput.value;
+            const targetDate = new Date(targetDateString);
+            const currentDate = new Date();
+
+
+            if (!targetDateString || targetDate.getTime() <= currentDate.getTime()) {
+                resetDisplayAndStop();
+                message.textContent = targetDateString ? "Please select a future date/time." : "Please select a date and time to start.";
+                message.classList.remove('hidden');
+                return;
+            }
+            startBtn.disabled = true;
+            message.classList.add('hidden');
+
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+
+            const Timer = setInterval(() => {
+                const innerCurrentDate = new Date();
+                const distance = targetDate.getTime() - innerCurrentDate.getTime();
+
+                if (distance < 0) {
+                    clearInterval(Timer);
+                    countdownInterval = null;
+                    message.textContent = "Countdown finished! Time's up!";
+                    message.classList.remove('hidden');
+                    resetDisplayAndStop();
+                    return;
+                }
+
+                const days = Math.floor(distance / MS_PER_DAY);
+                const hours = Math.floor((distance % MS_PER_DAY) / MS_PER_HOUR);
+                const minutes = Math.floor((distance % MS_PER_HOUR) / MS_PER_MINUTE);
+                const seconds = Math.floor((distance % MS_PER_MINUTE) / MS_PER_SECOND);
+
+
+                countdownDays.textContent = days.toString().padStart(2, '0');
+                countdownHours.textContent = hours.toString().padStart(2, '0');
+                countdownMinutes.textContent = minutes.toString().padStart(2, '0');
+                countdownSeconds.textContent = seconds.toString().padStart(2, '0');
+
+            }, 1000)
+
+            countdownInterval = Timer;
+        });
+
+
+        resetBtn.addEventListener('click', () => {
+            resetDisplayAndStop();
+            datetimeInput.value = '';
+            message.classList.add('hidden');
+            message.textContent = "";
+        });
+
+
+        function setDefaultInput() {
+            const now = new Date();
+            // Format to YYYY-MM-DDTHH:mm
+
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            const defaultDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+            datetimeInput.value = defaultDate;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setDefaultInput();
+        });
+
+    </script>
+</body>
+
+</html>
