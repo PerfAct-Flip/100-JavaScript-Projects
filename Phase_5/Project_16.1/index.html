@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulated Chat App</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    </style>
+</head>
+
+<body class="min-h-screen flex justify-center items-center">
+    <div
+        class="chatApp w-full md:w-1/2 lg:w-1/3 h-[90vh] flex flex-col bg-white rounded-3xl overflow-hidden shadow-2xl">
+        <div
+            class="headingContainer rounded-md px-4 py-1 bg-indigo-700 text-zinc-50 rounded-t-2xl px-4 py-3 text-white shadow-md">
+            <h1 class="heading text-xl font-bold ">Simulated ChatApp</h1>
+        </div>
+
+        <ul id="message-display" class="p-4 space-y-3 flex-grow overflow-y-auto">
+            <li class="flex justify-start">
+                <div class="response max-w-[80%] bg-zinc-200 rounded-xl px-4 py-2 text-zinc-500 shadow-sm">
+                    You are talking to a bot... 
+                </div>
+            </li>
+        </ul>
+        <div class="sendContainer font-mono border-t-4 border-zinc-200 pt-2 m-2 flex flex-row">
+            <input type="text" name="Message" id="userMsg" placeholder="Type your message"
+                class="bg-zinc-200 rounded-xl mx-2 py-1 px-4 w-3/4">
+            <button id="sendBtn"
+                class="rounded-xl px-2 py-1 w-1/4 bg-indigo-700 text-zinc-50 hover:bg-indigo-900">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const responses = [
+            "That's really insightful! I hadn't considered that angle.",
+            "Hmm, can you elaborate on that point? I'm processing.",
+            "Acknowledged. I'll search for related information.",
+            "I understand. How does that make you feel right now?",
+            "That's a very good question. Let me think...",
+            "Interesting! Tell me more about what you did today.",
+        ];
+
+        const userMsgInput = document.getElementById('userMsg');
+        const sendBtn = document.getElementById('sendBtn');
+        const msgDisplay = document.getElementById('message-display');
+
+
+
+        sendBtn.addEventListener('click', () => {
+            const inputMsg = userMsgInput.value;
+            if (inputMsg !== "") {
+                addMessage(inputMsg, 'user')
+                giveResponse();
+            }
+
+            userMsgInput.value = '';
+        })
+
+        function giveResponse() {
+            const delay = Math.random() * 1000 + 1000;
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * responses.length);
+                const simulatedText = responses[randomIndex];
+                addMessage(simulatedText, 'other');
+
+            }, delay);
+        }
+
+        function addMessage(text, user) {
+
+            const msgLi = document.createElement('li');
+
+            const msg = document.createElement('div');
+
+
+            if (user === 'user') {
+                msgLi.className = "flex justify-end";
+                msg.className = "msg max-w-[80%] rounded-xl px-4 py-2 bg-indigo-700 text-white shadow-md"
+            } else {
+                msgLi.className = "flex justify-start";
+                msg.className = "response max-w-[80%] bg-zinc-200 rounded-xl px-4 py-2 text-zinc-800 shadow-sm"
+            }
+            msg.textContent = text;
+            msgLi.appendChild(msg)
+            msgDisplay.appendChild(msgLi);
+        }
+    </script>
+</body>
+
+</html>
