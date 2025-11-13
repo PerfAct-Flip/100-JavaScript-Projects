@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .digit {
+            font-family: 'SF Mono', 'Courier New', monospace;
+            min-width: 4rem;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen items-center bg-gray-900 text-white">
+
+    <h1 class="text-4xl font-extrabold text-indigo-400 mt-10 mb-12 text-center tracking-wider">
+        Digital Clock
+    </h1>
+
+    <div class="flex flex-col flex-grow justify-center items-center w-full">
+
+        <div
+            class="clockContainer flex items-center justify-center p-8 md:p-12 bg-gray-800 rounded-2xl shadow-2xl border border-indigo-700/50">
+            <div class="flex space-x-2 md:space-x-4">
+
+
+                <div class="text-center">
+                    <p id="currentHrs" class="digit text-6xl md:text-8xl font-bold text-indigo-400 leading-none">00</p>
+                    <p class="text-sm uppercase text-gray-400 mt-2">Hours</p>
+                </div>
+
+                <span class="text-6xl md:text-8xl font-bold text-gray-600">:</span>
+
+                <div class="text-center">
+                    <p id="currentMins" class="digit text-6xl md:text-8xl font-bold text-indigo-400 leading-none">00</p>
+                    <p class="text-sm uppercase text-gray-400 mt-2">Minutes</p>
+                </div>
+
+                <span class="text-6xl md:text-8xl font-bold text-gray-600">:</span>
+
+      
+                <div class="text-center">
+                    <p id="currentSecs" class="digit text-6xl md:text-8xl font-bold text-indigo-400 leading-none">00</p>
+                    <p class="text-sm uppercase text-gray-400 mt-2">Seconds</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Digital Clock: Display the current time that updates every second using setInterval.
+
+        const currentHrs = document.querySelector('#currentHrs');
+        const currentMins = document.querySelector('#currentMins');
+        const currentSecs = document.querySelector('#currentSecs');
+
+    
+        function updateTime() {
+            const date = new Date();
+            const padTime = (unit) => unit.toString().padStart(2, '0');
+
+            currentHrs.textContent = padTime(date.getHours());
+            currentMins.textContent = padTime(date.getMinutes());
+            currentSecs.textContent = padTime(date.getSeconds());
+        }
+
+        updateTime();
+
+        setInterval(updateTime, 1000);
+
+    </script>
+</body>
+
+</html>
