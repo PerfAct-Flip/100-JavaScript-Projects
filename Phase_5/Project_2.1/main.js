@@ -1,7 +1,6 @@
 "use strict"
 
 // DOM Elements
-// The lines below are commented out, just like in your code.
 const quoteBox = document.querySelector('#quoteBox');
 const generatorButton = document.querySelector('#generatorButton');
 

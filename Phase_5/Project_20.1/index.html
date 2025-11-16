@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Progress Bar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-8">
+    <div class="w-full max-w-md bg-white p-6 rounded-xl shadow-2xl">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">File Upload Status</h2>
+
+        <div class="h-8 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+            <div id="loadingProgress" class="h-full bg-indigo-600 transition-all ease-in-out duration-50"
+                style="width: 0%">
+                <div id="progressText"
+                    class="text-sm font-semibold text-black px-4 flex justify-center items-center h-full">
+                    0%
+                </div>
+            </div>
+        </div>
+
+        <p id="statusMessage" class="text-center text-indigo-600 font-medium mt-4">
+            Starting...
+        </p>
+
+        <button id="startBtn"
+            class="mt-6 w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300"
+            onclick="startProgress()">
+            Start Upload
+        </button>
+    </div>
+
+    <script>
+        // ----- DOM Elements -----
+        const progressBar = document.getElementById('loadingProgress');
+        const progressText = document.getElementById('progressText');
+        const statusMessage = document.getElementById('statusMessage');
+        const startBtn = document.getElementById('startBtn');
+        let currentProgress = 0;
+        let interval;
+
+        function updateProgress () {
+            if (currentProgress >= 100) {
+                clearInterval(interval);
+                progressBar.style.width = '100%';
+                progressText.textContent = '100%';
+
+                statusMessage.textContent = 'Upload Complete!';
+                statusMessage.classList.remove('text-indigo-600');
+                statusMessage.classList.add('text-green-600');
+                startBtn.disabled = false;
+                startBtn.textContent = 'Restart Upload';
+                return;
+            }
+
+            currentProgress += 1;
+            progressBar.style.width = `${currentProgress}%`;
+            progressText.textContent = `${currentProgress}%`;
+
+            if (currentProgress > 0 && currentProgress < 100) {
+                statusMessage.textContent = 'Uploading file...';
+                statusMessage.classList.remove('text-green-600');
+                statusMessage.classList.add('text-indigo-600');
+            }
+        }
+        function startProgress() {
+            startBtn.disabled = true;
+            startBtn.textContent = 'Uploading...';
+
+            clearInterval(interval);
+            currentProgress = 0;
+            progressBar.style.width = '0%';
+            progressText.textContent = '0%';
+            statusMessage.textContent = 'Starting...';
+            statusMessage.classList.remove('text-green-600');
+            statusMessage.classList.add('text-indigo-600');
+
+            interval = setInterval(updateProgress, 50);
+        }
+    </script>
+
+</body>
+
+</html>
